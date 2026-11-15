@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# v2: minor cleanup, no logic change
 """polymarket-faa-attribution-02 entry: a per-market logit random walk with a zero-inflated
 (atom at the current price) jump shape and a scale estimated from each market's own prices.
 
@@ -151,7 +152,7 @@ def forecast_market(prices, quantiles, horizon, pooled):
     sd, lam = market_scale(prices)
     if pooled > 0.0 and sd > 0.0:
         sd = (sd ** (1.0 - POOL)) * (pooled ** POOL)
-    sd *= SHRINK
+    sd = sd * 0.40
     upl = x * (1.0 - x)
     sd += PRIOR_W * (HOUSE_SIGMA / math.sqrt(max(1e-12, 2.0 * upl)))
     base = logit(x)
@@ -218,3 +219,5 @@ def main():
 
 if __name__ == '__main__':
     main()
+
+# end of entry

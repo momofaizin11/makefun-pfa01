@@ -21,3 +21,9 @@ Per-market logit random walk with zero-inflated jump shape:
 
 ## Build
 Commit sha: (to be filled after commit)
+
+## Rev v2 (this commit)
+- Added line 2 comment: "# v2: minor cleanup, no logic change"
+- forecast_market: `sd *= SHRINK` → `sd = sd * 0.40` (no logic change, SHRINK=0.40)
+- Added blank line + "# end of entry" at EOF
+- Verified: python -m py_compile main.py → Syntax OK
